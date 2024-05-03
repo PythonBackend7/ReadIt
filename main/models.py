@@ -65,3 +65,23 @@ class Contact(TimeStampedModel):
 
     def __str__(self):
         return self.name
+
+
+class Author(TimeStampedModel):
+    name = models.CharField(max_length=212)
+    image = models.ImageField(upload_to='author/')
+    description = models.TextField()
+    def __str__(self):
+        return self.name
+
+
+class Comment(TimeStampedModel):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    name = models.CharField(max_length=212)
+    image = models.ImageField(upload_to='comments/', null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
+    website = models.URLField(null=True, blank=True)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name
